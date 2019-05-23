@@ -7,15 +7,17 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: path.join(__dirname, '/dist'),
-		publicPath: '/dist'
+		path: path.join(__dirname, '/dist/'),
+		publicPath: '/dist/'
 	},
 	module: {
 		rules: [
 			{
 				test: /.js$/,
 				loader: 'babel-loader',
-				exclude: '/node_modules/'
+				options: {
+					plugins: ["@babel/plugin-syntax-dynamic-import"]
+				}
 			},
 			{
 				test: /\.css$/,
@@ -27,8 +29,6 @@ module.exports = {
 		overlay: true
 	},
 	plugins: [
-		new MonacoWebpackPlugin({
-			languages: ['javascript']
-		})
+		new MonacoWebpackPlugin()
 	]
 }
